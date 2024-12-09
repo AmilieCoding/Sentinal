@@ -4,9 +4,14 @@ import os
 from dotenv import load_dotenv
 import asyncio
 
-# Temporary Solution until we figure out intents properly :sweat:
+# Prepares intents for usage, please review your bot dashboard if you are hosting your own service.
+intents = discord.Intents.default()
+intents.message_content = True
+intents.members = True
+intents.presences = True
+
 # Initialising command prefix and the bot's intents.
-client = commands.Bot(command_prefix=">", intents=discord.Intents.all())
+client = commands.Bot(command_prefix=">", intents=intents)
 
 # Ensuring client has successfully logged in.
 @client.event
