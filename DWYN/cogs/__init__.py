@@ -1,0 +1,1 @@
+print("Cogs package initialized!")

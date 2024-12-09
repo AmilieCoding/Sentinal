@@ -1,6 +1,8 @@
 import discord
+from discord.ext import commands
 import os
 from dotenv import load_dotenv
+import asyncio
 
 # Prepares intents for usage, please review your bot dashboard if you are hosting your own service.
 intents = discord.Intents.default()
@@ -8,21 +10,13 @@ intents.message_content = True
 intents.members = True
 intents.presences = True
 
-client = discord.Client(intents=intents)
+# Initialising command prefix and the bot's intents.
+client = commands.Bot(command_prefix=">", intents=intents)
 
 # Ensuring client has successfully logged in.
 @client.event
 async def on_ready():
     print(f'Logged in as {client.user}')
-
-# Basic Calling System. Checks for prefix and directs the user to use a command.
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-    
-    if message.content.startswith('$'):
-        await message.channel.send('Enter Desired Command')
 
 # ---------------------------------------------------------------------------------------------------------
 # IMPORTANT SECURITY WARNING - DO NOT IGNORE - FAILURE TO COMPLY RESULTS IN CONSEQUENCES - READ FULLY.
@@ -30,5 +24,32 @@ async def on_message(message):
 # as a hardcoded item in here. If you do and are caught your access to the support Discord will be revoked.
 # YOU WERE WARNED.
 # ---------------------------------------------------------------------------------------------------------
-load_dotenv()
-client.run(os.getenv("BOTTOKEN"))
+async def main():
+
+    # Specify your cogs here!
+    try:
+        await client.load_extension('cogs.utility.ping')
+        print(f"Successfully loaded all cogs.")
+    except Exception as e:
+        print(f"One or more cogs failed loading.")
+
+    # Loads bot token.
+    load_dotenv()
+    bottoken = os.getenv("BOTTOKEN")
+
+    if not bottoken:
+        raise ValueError("Bot token is not set. Check your .env file or environment variables.")
+
+    # Bot finally is run! Yippee!
+    try:
+        await client.start(bottoken)
+    except KeyboardInterrupt:
+        print("Shutting down gracefully...")
+    finally:
+        print("Bot has been shut down.")
+
+# Bots entry point.
+try:
+    asyncio.run(main())
+except KeyboardInterrupt:
+    print("Forcefully stopped.")
