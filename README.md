@@ -1,5 +1,5 @@
 # Does What You Need
-Does What You Need, also known as DWYN, is a Discord bot written in Discord.PY which aims to make a simple, effective and easy way to moderate your server, interact with members and keep your community safe while also being completely free and opensourced.<br>
+Does What You Need, also known as DWYN, is a Discord bot written in Discord.PY which aims to make a simple, effective and easy way to moderate your server, interact with members and keep your community safe while also being completely free and open source.<br>
 <br>
 # Planned Features
 DWYN has many planned features including but not limited to:
