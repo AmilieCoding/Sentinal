@@ -36,7 +36,6 @@ async def main():
     # Loads bot token.
     load_dotenv()
     bottoken = os.getenv("BOTTOKEN")
-
     if not bottoken:
         raise ValueError("Bot token is not set. Check your .env file or environment variables.")
 
