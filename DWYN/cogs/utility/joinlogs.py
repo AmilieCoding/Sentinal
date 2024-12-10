@@ -3,7 +3,7 @@ import json
 from discord.ext import commands
 from pathlib import Path
 
-CONFIG_FILE = Path(__file__).parent / "config.json"
+CONFIG_FILE = Path(__file__).parent / "jl_config.json"
 
 class JoinLogs(commands.Cog):
     def __init__(self, bot):

@@ -44,7 +44,7 @@ async def main():
     try:
         await client.start(bottoken)
     except KeyboardInterrupt:
-        print("Shutting down gracefully...")
+        print("Shutting down :)")
     finally:
         print("Bot has been shut down.")
 
