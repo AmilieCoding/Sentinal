@@ -29,6 +29,7 @@ async def main():
     # Specify your cogs here!
     try:
         await client.load_extension('cogs.utility.ping')
+        await client.load_extension('cogs.utility.joinlogs')
         print(f"Successfully loaded all cogs.")
     except Exception as e:
         print(f"One or more cogs failed loading.")
@@ -43,7 +44,7 @@ async def main():
     try:
         await client.start(bottoken)
     except KeyboardInterrupt:
-        print("Shutting down gracefully...")
+        print("Shutting down :)")
     finally:
         print("Bot has been shut down.")
 
