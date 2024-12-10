@@ -22,4 +22,6 @@ DWYN is simple to host yourself. Just download the repository and, using `pip`, 
 
 ---
 
-**Disclaimer:** DWYN is an open-source bot created by people who are just experimenting. In the case of something going wrong, the developers or contributors to this GitHub repository cannot and will not be held accountable. By using this software, you agree to these terms.
+# Disclaimer
+
+DWYN is an open-source bot created by people who are just experimenting. In the case of something going wrong, the developers or contributors to this GitHub repository cannot and will not be held accountable. By using this software, you agree to these terms.
