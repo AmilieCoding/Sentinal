@@ -33,26 +33,29 @@ class JoinLogs(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def set_join_log(self, ctx, *args):
         guild_id = str(ctx.guild.id)
+        if not args:
+            await ctx.send("Please specify the state (on/off) for join logs.")
+            return
+        
         state = None
         channel = None
 
-        for i, arg in enumerate(args):
-            if arg.startswith("?s"):
-                state = arg[2:].strip().lower() 
-            elif arg.startswith("?c") and i + 1 < len(args):
-                try:
-                    channel = await commands.TextChannelConverter().convert(ctx, args[i + 1])
-                except commands.BadArgument:
-                    await ctx.send(f"Invalid channel: {args[i + 1]}")
-                    return
+        if args[0].startswith("?s") and len(args) > 1:
+            state = args[1].strip().lower()
 
         if state not in ("on", "off"):
-            await ctx.send("Invalid or missing state. Use `?s on` to enable or `?s off` to disable.")
+            await ctx.send("Invalid state. Use `on` to enable or `off` to disable.")
             return
 
         if state == "on":
+            if len(args) > 2 and args[2].startswith("?c") and len(args) > 3:
+                try:
+                    channel = await commands.TextChannelConverter().convert(ctx, args[3])
+                except commands.BadArgument:
+                    await ctx.send(f"Invalid channel: {args[3]}")
+                    return
             if channel is None:
-                await ctx.send("Missing channel. Use `?c #channel-name` to specify the channel.")
+                await ctx.send("Please specify a channel with `?c #channel-name`.")
                 return
 
             self.config[guild_id] = channel.id
