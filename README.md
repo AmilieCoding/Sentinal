@@ -4,7 +4,7 @@ Does What You Need, also known as DWYN, is a Discord bot written in Discord.PY w
 
 ---
 
-# Planned Features
+## Planned Features
 
 DWYN has many planned features, including but not limited to:
 - An Effective Moderation System
@@ -14,7 +14,7 @@ DWYN has many planned features, including but not limited to:
 
 ---
 
-# Hosting Your Own Version
+## Hosting Your Own Version
 
 DWYN is simple to host yourself. Just download the repository and, using `pip`, manually install the dependencies listed in `dependencies.txt`. You can then open `bot.py` in your chosen text editor (e.g., VSCode) and run `bot.py`. It will error out about a token. To fix this, go to `.env` and replace `[REDACTED FOR SECURITY]` with *YOUR* generated bot token. 
 
@@ -22,6 +22,6 @@ DWYN is simple to host yourself. Just download the repository and, using `pip`, 
 
 ---
 
-# Disclaimer
+## Disclaimer
 
 DWYN is an open-source bot created by people who are just experimenting. In the case of something going wrong, the developers or contributors to this GitHub repository cannot and will not be held accountable. By using this software, you agree to these terms.
