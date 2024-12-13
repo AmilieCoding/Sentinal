@@ -1,6 +1,6 @@
-# Does What You Need
+# Sentinal
 
-Does What You Need, also known as DWYN, is a Discord bot written in Discord.PY which aims to make a simple, effective, and easy way to moderate your server, interact with members, and keep your community safe while also being completely free and open source.
+Sentinal, is a Discord bot written in Discord.PY which aims to make a simple, effective, and easy way to moderate your server, interact with members, and keep your community safe while also being completely free and open source.
 
 ---
 
