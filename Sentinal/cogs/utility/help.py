@@ -19,24 +19,26 @@ class HelpDropdown(discord.ui.Select):
     async def callback(self, interaction: discord.Interaction):
         embed = discord.Embed(title="Help", description="An unexpected error occurred.", colour=discord.Color.red())
         
-        # Handle dropdown options
+        # -> Handle dropdown options
         if self.values[0] == "Moderation":
             embed = discord.Embed(
                 title="Moderation Commands",
                 description="The commands shown below can only be used by moderators of the server.",
                 colour=discord.Colour.brand_green()
             )
-            embed.add_field(name="`ban`", value="Bans a user from the current guild. `ID` `@UserMention`", inline=False)
-            embed.add_field(name="`kick`", value="Kicks a user from the current guild. `ID` `@UserMention`.", inline=False)
+            embed.add_field(name="`ban`", value="Bans a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
+            embed.add_field(name="`kick`", value="Kicks a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
+            embed.add_field(name="`clear`", value="Deletes a bulk of messages at once. `$clear [Amount]`", inline=False)
         elif self.values[0] == "Utility":
             embed = discord.Embed(
                 title="Utility Commands",
                 description="Commands to assist the user with information about the bot.",
                 colour=discord.Colour.brand_green()
             )
-            embed.add_field(name="`ping`", value="Shows the bot's latency.", inline=False)
+            embed.add_field(name="`ping`", value="Shows the bot's current latency when requested.", inline=False)
+            embed.add_field(name="`help`", value="Gives you an interactive menu to explore features of our bot.", inline=False)
 
-        # Update the view to include the Back button
+        # -> Update the view to include the Back button
         view = HelpView(self.bot, self.original_embed, show_back=True)
         await interaction.response.edit_message(embed=embed, view=view)
 
@@ -48,7 +50,7 @@ class BackButton(discord.ui.Button):
         self.original_embed = original_embed
 
     async def callback(self, interaction: discord.Interaction):
-        # Reset to the original embed
+        # -> Reset to the original embed
         view = HelpView(self.bot, self.original_embed, show_back=False)
         await interaction.response.edit_message(embed=self.original_embed, view=view)
 
@@ -80,7 +82,8 @@ class HelpCog(commands.Cog):
             colour=discord.Colour.brand_green()
         )
         original_embed.set_footer(text=f"Requested by {ctx.author}", icon_url=ctx.author.avatar.url)
-        view = HelpView(self.bot, original_embed, show_back=False)  # No Back button on the original embed
+        # -> Line 84: Removing the 'Back Button' from showing on the original embed.
+        view = HelpView(self.bot, original_embed, show_back=False)
         await ctx.send(embed=original_embed, view=view)
 
 

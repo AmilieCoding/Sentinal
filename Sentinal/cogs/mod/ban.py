@@ -8,7 +8,7 @@ class BanCog(commands.Cog):
     @commands.command(name="ban")
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member = None):
-        # Check if a member was specified
+        # -> Check if a member was specified
         if not member:
             embed = discord.Embed(
                 title="Missing Member",
@@ -18,7 +18,7 @@ class BanCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Check if the bot has permission to ban the user
+        # -> Check if the bot has permission to ban the user
         if not ctx.guild.me.guild_permissions.ban_members:
             embed = discord.Embed(
                 title="Insufficient Permissions",
@@ -28,7 +28,7 @@ class BanCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Check if the bot can ban the specified user (hierarchy check)
+        # -> Check if the bot can ban the specified user (hierarchy check)
         if member.top_role >= ctx.guild.me.top_role or member == ctx.guild.owner:
             embed = discord.Embed(
                 title="Cannot Ban User",
@@ -38,7 +38,7 @@ class BanCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Check if the moderator is trying to ban themselves
+        # -> Check if the moderator is trying to ban themselves
         if member == ctx.author:
             embed = discord.Embed(
                 title="Action Not Allowed",
@@ -48,7 +48,7 @@ class BanCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Attempt to ban the user
+        # -> Attempt to ban the user
         try:
             await ctx.guild.ban(member)
             embed = discord.Embed(
