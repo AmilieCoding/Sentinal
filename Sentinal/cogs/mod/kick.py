@@ -5,10 +5,10 @@ class KickCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Example command: kick
+    # -> Example command: kick
     @commands.command(name="kick")
     async def kick(self, ctx, member: discord.Member = None):
-        # Check if a member was specified
+        # -> Check if a member was specified
         if not member:
             embed = discord.Embed(
                 title="Missing Member",
@@ -18,7 +18,7 @@ class KickCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Check if the bot has permission to kick the user
+        # -> Check if the bot has permission to kick the user
         if not ctx.guild.me.guild_permissions.kick_members:
             embed = discord.Embed(
                 title="Insufficient Permissions",
@@ -28,7 +28,7 @@ class KickCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Check if the bot can kick the specified user (hierarchy check)
+        # -> Check if the bot can kick the specified user (hierarchy check)
         if member.top_role >= ctx.guild.me.top_role or member == ctx.guild.owner:
             embed = discord.Embed(
                 title="Cannot Kick User",
@@ -38,7 +38,7 @@ class KickCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Check if the moderator is trying to kick themselves
+        # -> Check if the moderator is trying to kick themselves
         if member == ctx.author:
             embed = discord.Embed(
                 title="Action Not Allowed",
@@ -48,7 +48,7 @@ class KickCog(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # Attempt to kick the user
+        # -> Attempt to kick the user
         try:
             await ctx.guild.kick(member)
             embed = discord.Embed(
@@ -73,6 +73,6 @@ class KickCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
-# Proper async setup function
+# -> Proper async setup function
 async def setup(bot: commands.Bot):
     await bot.add_cog(KickCog(bot))

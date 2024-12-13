@@ -16,6 +16,7 @@ async def load_extensions():
         await bot.load_extension('cogs.mod.kick')
         await bot.load_extension('cogs.mod.ban')
         await bot.load_extension('cogs.utility.help')
+        await bot.load_extension('cogs.mod.clear')
         print("Successfully loaded cogs.")
     except Exception as e:
         print(f"One or more cogs failed to load: {e}")
@@ -30,7 +31,7 @@ async def on_ready():
 async def main():
     await load_extensions()  # Load all cogs
     async with bot:
-        await bot.start("PUT YOUR BOT TOKEN HERE!")
+        await bot.start("PRIVATE FOR SECURITY - REPLACE WITH YOUR OWN BOT TOKEN")
 
 # -> Run the bot.
 if __name__ == "__main__":
