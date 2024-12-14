@@ -13,11 +13,14 @@ bot = commands.Bot(command_prefix="$", intents=intents, help_command=None)
 async def load_extensions():
     try:
         await bot.load_extension('cogs.utility.ping')
+        await bot.load_extension('cogs.utility.help')
         await bot.load_extension('cogs.mod.kick')
         await bot.load_extension('cogs.mod.ban')
-        await bot.load_extension('cogs.utility.help')
+        await bot.load_extension('cogs.mod.unban')
         await bot.load_extension('cogs.mod.clear')
         await bot.load_extension('cogs.mod.lockdown')
+        await bot.load_extension('cogs.mod.forceban')
+        await bot.load_extension('cogs.developer.say')
         print("Successfully loaded cogs.")
     except Exception as e:
         print(f"One or more cogs failed to load: {e}")
