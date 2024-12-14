@@ -17,6 +17,7 @@ async def load_extensions():
         await bot.load_extension('cogs.mod.ban')
         await bot.load_extension('cogs.utility.help')
         await bot.load_extension('cogs.mod.clear')
+        await bot.load_extension('cogs.mod.lockdown')
         print("Successfully loaded cogs.")
     except Exception as e:
         print(f"One or more cogs failed to load: {e}")
