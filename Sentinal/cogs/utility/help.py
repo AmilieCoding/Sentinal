@@ -8,6 +8,7 @@ class HelpDropdown(discord.ui.Select):
         options = [
             discord.SelectOption(label="Moderation", description="View moderation commands."),
             discord.SelectOption(label="Utility", description="View utility commands."),
+            discord.SelectOption(label="Developer", description="View developer only commands."),
         ]
         super().__init__(
             placeholder="Select a category...",
@@ -29,6 +30,10 @@ class HelpDropdown(discord.ui.Select):
             embed.add_field(name="`ban`", value="Bans a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
             embed.add_field(name="`kick`", value="Kicks a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
             embed.add_field(name="`clear`", value="Deletes a bulk of messages at once. `$clear [Amount]`", inline=False)
+            embed.add_field(name="`lockdown`", value="Lockdown an individual channel. `$lockdown [channel] [messsage]`", inline=False)
+            embed.add_field(name="`unlock`", value="Unlock an individual channel. `$lockdown [channel] [messsage]`", inline=False)
+            embed.add_field(name="`lockdownall`", value="**Dangerous:** Lockdown all server channels. `$lockdownall`", inline=False)
+            embed.add_field(name="`unlockall`", value="**Dangerous:** Unlocks all server channels. `$unlockall`", inline=False)
         elif self.values[0] == "Utility":
             embed = discord.Embed(
                 title="Utility Commands",
@@ -37,6 +42,13 @@ class HelpDropdown(discord.ui.Select):
             )
             embed.add_field(name="`ping`", value="Shows the bot's current latency when requested.", inline=False)
             embed.add_field(name="`help`", value="Gives you an interactive menu to explore features of our bot.", inline=False)
+        elif self.values[0] == "Developer":
+            embed = discord.Embed(
+                title="Developer Commands",
+                description="These commands are used to help assist the Sentinal developers.",
+                colour=discord.Colour.brand_green()
+            )
+            embed.add_field(name="`say`", value="Bot outputs messsage requested. `$say [message]`", inline=False)
 
         # -> Update the view to include the Back button
         view = HelpView(self.bot, self.original_embed, show_back=True)
@@ -69,7 +81,6 @@ class HelpCog(commands.Cog):
 
     @commands.command(name="help")
     async def help_command(self, ctx):
-        """Sends an embed explaining how to use the help command."""
         original_embed = discord.Embed(
             title="Help Command",
             description=(
@@ -77,7 +88,8 @@ class HelpCog(commands.Cog):
                 "Each category contains commands grouped by functionality.\n\n"
                 "Examples:\n"
                 "`/help Moderation` - Shows moderation commands.\n"
-                "`/help Utility` - Shows utility commands."
+                "`/help Utility` - Shows utility commands.\n"
+                "`/help Developer` - Shows developer only commands.\n"
             ),
             colour=discord.Colour.brand_green()
         )
