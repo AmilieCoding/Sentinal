@@ -13,7 +13,6 @@ class UnbanCog(commands.Cog):
             embed = discord.Embed(
                 title="Missing Identifier",
                 description="You need to specify a user to unban using their username or user ID.",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
             return
@@ -28,7 +27,6 @@ class UnbanCog(commands.Cog):
                         embed = discord.Embed(
                             title="User Unbanned",
                             description=f"The user `{ban_entry.user}` has been successfully unbanned.",
-                            colour=discord.Color.brand_green()
                         )
                         embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
                         await ctx.send(embed=embed)
@@ -43,7 +41,6 @@ class UnbanCog(commands.Cog):
                         embed = discord.Embed(
                             title="User Unbanned",
                             description=f"The user `{ban_entry.user}` has been successfully unbanned.",
-                            colour=discord.Color.brand_green()
                         )
                         embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
                         await ctx.send(embed=embed)
@@ -53,7 +50,6 @@ class UnbanCog(commands.Cog):
             embed = discord.Embed(
                 title="User Not Found",
                 description=f"No banned user matching `{identifier}` was found.",
-                colour=discord.Color.orange()
             )
             await ctx.send(embed=embed)
 
@@ -61,7 +57,6 @@ class UnbanCog(commands.Cog):
             embed = discord.Embed(
                 title="Insufficient Permissions",
                 description="I don't have the required permissions to unban this user.",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
 
@@ -69,7 +64,6 @@ class UnbanCog(commands.Cog):
             embed = discord.Embed(
                 title="Error",
                 description=f"An unexpected error occurred: {str(e)}",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
 

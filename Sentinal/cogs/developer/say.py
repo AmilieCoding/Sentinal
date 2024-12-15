@@ -24,7 +24,6 @@ class SayCog(commands.Cog):
             embed = discord.Embed(
                 title="Access Denied",
                 description="You are not part of the Developer team, therefore you cannot use this command.",
-                color=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
 

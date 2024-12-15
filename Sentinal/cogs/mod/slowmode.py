@@ -29,7 +29,6 @@ class SlowmodeCog(commands.Cog):
                 embed = discord.Embed(
                     title="Error",
                     description=str(e),
-                    color=discord.Color.brand_red()
                 )
                 await ctx.send(embed=embed)
                 return
@@ -52,7 +51,6 @@ class SlowmodeCog(commands.Cog):
             embed = discord.Embed(
                 title="Invalid Slowmode Value",
                 description="Slowmode delay cannot be negative.",
-                color=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
             return
@@ -64,15 +62,12 @@ class SlowmodeCog(commands.Cog):
             # -> Provide feedback to the user.
             if seconds == 0:
                 description = f"Slowmode has been **disabled** in {channel.mention}."
-                color = discord.Color.red()
             else:
                 description = f"Slowmode for {channel.mention} is now set to **{seconds} seconds**."
-                color = discord.Color.brand_green()
 
             embed = discord.Embed(
                 title="Slowmode Updated",
                 description=description,
-                color=color
             )
             embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
 
@@ -83,7 +78,6 @@ class SlowmodeCog(commands.Cog):
             embed = discord.Embed(
                 title="Permission Denied",
                 description=f"I don't have permission to edit {channel.mention}.",
-                color=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
         except Exception as e:
@@ -91,7 +85,6 @@ class SlowmodeCog(commands.Cog):
             embed = discord.Embed(
                 title="Error",
                 description=f"An unexpected error occurred: {e}",
-                color=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
 
