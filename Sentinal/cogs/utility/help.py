@@ -18,27 +18,27 @@ class HelpDropdown(discord.ui.Select):
         )
 
     async def callback(self, interaction: discord.Interaction):
-        embed = discord.Embed(title="Help", description="An unexpected error occurred.", colour=discord.Color.red())
+        embed = discord.Embed(title="Help", description="An unexpected error occurred.", colour=discord.Color.brand_red())
         
         # -> Handle dropdown options
         if self.values[0] == "Moderation":
             embed = discord.Embed(
                 title="Moderation Commands",
                 description="The commands shown below can only be used by moderators of the server.",
-                colour=discord.Colour.brand_green()
             )
             embed.add_field(name="`ban`", value="Bans a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
+            embed.add_field(name="`forceban`", value="Bans a user from the guild without them being within the server. `$forceban`", inline=False)
             embed.add_field(name="`kick`", value="Kicks a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
-            embed.add_field(name="`clear`", value="Deletes a bulk of messages at once. `$clear [Amount]`", inline=False)
+            embed.add_field(name="`clear`", value="**Dangerous:** Deletes a bulk of messages at once. `$clear [Amount]`", inline=False)
             embed.add_field(name="`lockdown`", value="Lockdown an individual channel. `$lockdown [channel] [messsage]`", inline=False)
             embed.add_field(name="`unlock`", value="Unlock an individual channel. `$lockdown [channel] [messsage]`", inline=False)
             embed.add_field(name="`lockdownall`", value="**Dangerous:** Lockdown all server channels. `$lockdownall`", inline=False)
             embed.add_field(name="`unlockall`", value="**Dangerous:** Unlocks all server channels. `$unlockall`", inline=False)
+            embed.add_field(name="`slowmode`", value="Enforces a timer between messages sent.  `$slowmode [channel] [seconds]`", inline=False)
         elif self.values[0] == "Utility":
             embed = discord.Embed(
                 title="Utility Commands",
                 description="Commands to assist the user with information about the bot.",
-                colour=discord.Colour.brand_green()
             )
             embed.add_field(name="`ping`", value="Shows the bot's current latency when requested.", inline=False)
             embed.add_field(name="`help`", value="Gives you an interactive menu to explore features of our bot.", inline=False)
@@ -46,7 +46,6 @@ class HelpDropdown(discord.ui.Select):
             embed = discord.Embed(
                 title="Developer Commands",
                 description="These commands are used to help assist the Sentinal developers.",
-                colour=discord.Colour.brand_green()
             )
             embed.add_field(name="`say`", value="Bot outputs messsage requested. `$say [message]`", inline=False)
 
@@ -91,7 +90,6 @@ class HelpCog(commands.Cog):
                 "`/help Utility` - Shows utility commands.\n"
                 "`/help Developer` - Shows developer only commands.\n"
             ),
-            colour=discord.Colour.brand_green()
         )
         original_embed.set_footer(text=f"Requested by {ctx.author}", icon_url=ctx.author.avatar.url)
         # -> Line 84: Removing the 'Back Button' from showing on the original embed.
