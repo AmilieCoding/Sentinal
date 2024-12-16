@@ -1,0 +1,14 @@
+{ "cogs": [
+    "cogs.utility.ping",
+    "cogs.utility.help",
+    "cogs.mod.kick",
+    "cogs.mod.ban",
+    "cogs.mod.unban",
+    "cogs.mod.clear",
+    "cogs.mod.forceban",
+    "cogs.mod.warn",
+    "cogs.security.lockdown",
+    "cogs.security.slowmode",
+    "cogs.developer.say"
+    ]
+}
