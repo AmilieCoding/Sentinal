@@ -26,6 +26,14 @@ class WarnSystem(commands.Cog):
         guild_id = str(ctx.guild.id)
         user_id = str(member.id)
 
+        if not member:
+            embed = discord.Embed(
+                title="Missing Member",
+                description="You need to specify a user to kick. Please mention a user.",
+            )
+            await ctx.send(embed=embed)
+            return
+
         # -> Ensure the guild and user entries exist in warnings.
         if guild_id not in self.warnings:
             self.warnings[guild_id] = {}
@@ -43,7 +51,6 @@ class WarnSystem(commands.Cog):
         embed = discord.Embed(
             title="User Warned",
             description=f"{member.mention} has been warned.",
-            color=discord.Color.brand_red()
         )
         embed.add_field(name="Reason", value=reason, inline=False)
         embed.add_field(name="Warning Code", value=warn_code, inline=False)
@@ -70,13 +77,11 @@ class WarnSystem(commands.Cog):
                 embed = discord.Embed(
                     title="No Warnings",
                     description=f"{member.mention} has no warnings.",
-                    color=discord.Color.brand_red()
                 )
         else:
             embed = discord.Embed(
                 title="No Warnings",
                 description=f"{member.mention} has no warnings.",
-                color=discord.Color.brand_red()
             )
 
         await ctx.send(embed=embed)
@@ -93,13 +98,11 @@ class WarnSystem(commands.Cog):
             embed = discord.Embed(
                 title="Warnings Cleared",
                 description=f"All warnings for {member.mention} have been cleared.",
-                color=discord.Color.brand_green()
             )
         else:
             embed = discord.Embed(
                 title="No Warnings Found",
                 description=f"{member.mention} has no warnings to clear.",
-                color=discord.Color.brand_red()
             )
 
         await ctx.send(embed=embed)
@@ -124,7 +127,6 @@ class WarnSystem(commands.Cog):
                     embed = discord.Embed(
                         title="Warning Deleted",
                         description=f"Warning `{code}` for {member.mention} has been deleted.",
-                        color=discord.Color.green()
                     )
                     await ctx.send(embed=embed)
                     return
@@ -133,14 +135,12 @@ class WarnSystem(commands.Cog):
             embed = discord.Embed(
                 title="Warning Not Found",
                 description=f"No warning with code `{code}` found for {member.mention}.",
-                color=discord.Color.brand_red()
             )
         else:
             # -> If no warnings exist for the user.
             embed = discord.Embed(
                 title="No Warnings Found",
                 description=f"{member.mention} has no warnings.",
-                color=discord.Color.brand_red()
             )
 
         await ctx.send(embed=embed)

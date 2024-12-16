@@ -13,7 +13,6 @@ class BanCog(commands.Cog):
             embed = discord.Embed(
                 title="Missing Member",
                 description="You need to specify a user to ban. Please mention a user.",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
             return
@@ -23,7 +22,6 @@ class BanCog(commands.Cog):
             embed = discord.Embed(
                 title="Insufficient Permissions",
                 description="I don't have permission to ban users in this server.",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
             return
@@ -33,7 +31,6 @@ class BanCog(commands.Cog):
             embed = discord.Embed(
                 title="Cannot Ban User",
                 description="I cannot ban this user. They have a higher or equal role than me.",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
             return
@@ -42,8 +39,7 @@ class BanCog(commands.Cog):
         if member == ctx.author:
             embed = discord.Embed(
                 title="Action Not Allowed",
-                description="You cannot ban yourself.",
-                colour=discord.Color.brand_red()
+                description="You cannot perform this action on yourself.",
             )
             await ctx.send(embed=embed)
             return
@@ -54,7 +50,6 @@ class BanCog(commands.Cog):
             embed = discord.Embed(
                 title="User Banned",
                 description=f"The user {member.mention} has been successfully banned from this guild.",
-                colour=discord.Color.brand_green()
             )
             embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
             await ctx.send(embed=embed)
@@ -62,14 +57,12 @@ class BanCog(commands.Cog):
             embed = discord.Embed(
                 title="Insufficient Permissions",
                 description="I don't have the required permissions to ban this user.",
-                colour=discord.Color.brand_red()
             )
             await ctx.send(embed=embed)
         except discord.HTTPException as e:
             embed = discord.Embed(
                 title="Ban Failed",
                 description=f"An error occurred while trying to ban the user: {str(e)}",
-                colour=discord.Color.orange()
             )
             await ctx.send(embed=embed)
 
