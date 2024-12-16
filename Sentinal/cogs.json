@@ -9,6 +9,7 @@
     "cogs.mod.warn",
     "cogs.security.lockdown",
     "cogs.security.slowmode",
-    "cogs.developer.say"
+    "cogs.developer.say",
+    "cogs.fun.gru"
     ]
 }

@@ -34,7 +34,7 @@ async def on_ready():
 async def main():
     await load_extensions()  # Load all cogs
     async with bot:
-        await bot.start("stop")
+        await bot.start("LOL No")
 
 # -> Run the bot.
 if __name__ == "__main__":
