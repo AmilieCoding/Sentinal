@@ -5,7 +5,7 @@ class SlowmodeCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="slowmode")
+    @commands.command(name="slowmode", aliases=["sm"])
     @commands.has_permissions(manage_channels=True)
     async def slowmode(self, ctx, *args):
         # -> Default values.

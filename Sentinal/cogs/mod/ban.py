@@ -5,7 +5,7 @@ class BanCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="ban")
+    @commands.command(name="ban", aliases=["b"])
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member = None):
         # -> Check if a member was specified

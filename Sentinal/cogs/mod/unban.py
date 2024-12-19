@@ -5,7 +5,7 @@ class UnbanCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="unban")
+    @commands.command(name="unban", aliases=["ub"])
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, *, identifier: str = None):
         # -> Check if an identifier (username or ID) was provided

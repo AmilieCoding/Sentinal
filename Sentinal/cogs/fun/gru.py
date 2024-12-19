@@ -16,10 +16,6 @@ class GruCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("GruCog is ready!")
-
     @commands.command(name="gru", description="Random Gru GIF iykyk")
     async def gru(self, ctx: commands.Context):
         selected_gif = random.choice(self.gru_gifs)  # Access class attribute

@@ -5,7 +5,7 @@ class ForceBanCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="forceban")
+    @commands.command(name="forceban", aliases=["fb"])
     @commands.has_permissions(ban_members=True)
     async def forceban(self, ctx, user_id: int = None): 
         # -> Check if the user ID is provided

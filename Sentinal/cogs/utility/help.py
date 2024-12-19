@@ -78,7 +78,7 @@ class HelpCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="help")
+    @commands.command(name="help", aliases=["h"])
     async def help_command(self, ctx):
         original_embed = discord.Embed(
             title="Help Command",

@@ -20,7 +20,7 @@ class WarnSystem(commands.Cog):
         with open(self.warn_data_path, "w") as f:
             json.dump(self.warnings, f, indent=4)
 
-    @commands.command(name="warn")
+    @commands.command(name="warn", aliases=["w"])
     @commands.has_permissions(manage_messages=True)
     async def warn(self, ctx, member: discord.Member, *, reason: str):
         guild_id = str(ctx.guild.id)
@@ -58,7 +58,7 @@ class WarnSystem(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name="warnings")
+    @commands.command(name="warnings", aliases=["warns"])
     @commands.has_permissions(manage_messages=True)
     async def warnings(self, ctx, member: discord.Member):
         guild_id = str(ctx.guild.id)
@@ -86,7 +86,7 @@ class WarnSystem(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name="clearwarnings")
+    @commands.command(name="clearwarnings", aliases=["clearwarns"])
     @commands.has_permissions(manage_messages=True)
     async def clearwarnings(self, ctx, member: discord.Member):
         guild_id = str(ctx.guild.id)
@@ -107,7 +107,7 @@ class WarnSystem(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name="delwarn")
+    @commands.command(name="delwarn", aliases=["deletewarn"])
     @commands.has_permissions(manage_messages=True)
     async def delwarn(self, ctx, member: discord.Member, code: str):
         guild_id = str(ctx.guild.id)

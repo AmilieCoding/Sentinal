@@ -18,7 +18,7 @@ class LockdownCog(commands.Cog):
 
         await channel.send(embed=embed)
 
-    @commands.command()
+    @commands.command(name="lockdown", aliases=["ld"])
     @commands.has_permissions(manage_channels=True)
     async def lockdown(self, ctx, channel: discord.TextChannel = None, *, message=None):
         # -> Default to current channel if no channel specified.
@@ -49,7 +49,7 @@ class LockdownCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
-    @commands.command(name="lockdownall")
+    @commands.command(name="lockdownall", aliases=["ldall"])
     @commands.has_permissions(manage_channels=True)
     async def lockdownall(self, ctx, *, message=None):
         try:
@@ -107,7 +107,7 @@ class LockdownCog(commands.Cog):
 
         await channel.send(embed=embed)
 
-    @commands.command()
+    @commands.command(name="unlock", aliases=["ul"])
     @commands.has_permissions(manage_channels=True)
     async def unlock(self, ctx, channel: discord.TextChannel = None, *, message=None):
         # -> As againn, defaults to current channel if no channel specified.
@@ -138,7 +138,7 @@ class LockdownCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
-    @commands.command(name="unlockall")
+    @commands.command(name="unlockall", aliases=["ulall"])
     @commands.has_permissions(manage_channels=True)
     async def unlockall(self, ctx, *, message=None):
         try:
