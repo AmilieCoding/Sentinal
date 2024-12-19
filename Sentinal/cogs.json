@@ -1,6 +1,7 @@
 { "cogs": [
     "cogs.utility.ping",
     "cogs.utility.help",
+    "cogs.utility.invite",
     "cogs.mod.kick",
     "cogs.mod.ban",
     "cogs.mod.unban",

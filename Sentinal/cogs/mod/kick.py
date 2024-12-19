@@ -6,7 +6,7 @@ class KickCog(commands.Cog):
         self.bot = bot
 
     # -> Example command: kick
-    @commands.command(name="kick")
+    @commands.command(name="kick", aliases=["k"])
     async def kick(self, ctx, member: discord.Member = None):
         # -> Check if a member was specified
         if not member:
