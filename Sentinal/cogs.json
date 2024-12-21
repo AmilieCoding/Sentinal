@@ -2,6 +2,8 @@
     "cogs.utility.ping",
     "cogs.utility.help",
     "cogs.utility.invite",
+    "cogs.utility.autorole",
+    "cogs.utility.servercount",
     "cogs.mod.kick",
     "cogs.mod.ban",
     "cogs.mod.unban",

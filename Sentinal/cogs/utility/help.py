@@ -6,8 +6,10 @@ class HelpDropdown(discord.ui.Select):
         self.bot = bot
         self.original_embed = original_embed
         options = [
-            discord.SelectOption(label="Moderation", description="View moderation commands."),
+            discord.SelectOption(label="Fun", description="View fun commands."),
+            discord.SelectOption(label="Security", description="View security commands."),
             discord.SelectOption(label="Utility", description="View utility commands."),
+            discord.SelectOption(label="Moderation", description="View moderation commands."),
             discord.SelectOption(label="Developer", description="View developer only commands."),
         ]
         super().__init__(
@@ -30,18 +32,34 @@ class HelpDropdown(discord.ui.Select):
             embed.add_field(name="`forceban`", value="Bans a user from the guild without them being within the server. `$forceban`", inline=False)
             embed.add_field(name="`kick`", value="Kicks a user from the current guild. `$ban [ID, @UserMention]`", inline=False)
             embed.add_field(name="`clear`", value="**Dangerous:** Deletes a bulk of messages at once. `$clear [Amount]`", inline=False)
+
+        elif self.values[0] == "Fun":
+            embed = discord.Embed(
+                title="Fun Commands",
+                description="Commands to have fun with the bot."
+            )
+            embed.add_field(name="`gru`", value="Gru gifs sent straight to the channel.", inline=False)
+
+        elif self.values[0] == "Security":
+            embed = discord.Embed(
+                title="Security Commands",
+                description="Commands to help secure the server from potential threats.",
+            )
             embed.add_field(name="`lockdown`", value="Lockdown an individual channel. `$lockdown [channel] [messsage]`", inline=False)
             embed.add_field(name="`unlock`", value="Unlock an individual channel. `$lockdown [channel] [messsage]`", inline=False)
             embed.add_field(name="`lockdownall`", value="**Dangerous:** Lockdown all server channels. `$lockdownall`", inline=False)
             embed.add_field(name="`unlockall`", value="**Dangerous:** Unlocks all server channels. `$unlockall`", inline=False)
             embed.add_field(name="`slowmode`", value="Enforces a timer between messages sent.  `$slowmode [channel] [seconds]`", inline=False)
+
         elif self.values[0] == "Utility":
             embed = discord.Embed(
                 title="Utility Commands",
                 description="Commands to assist the user with information about the bot.",
             )
             embed.add_field(name="`ping`", value="Shows the bot's current latency when requested.", inline=False)
+            embed.add_field(name="`invite`", value="Gives the recipitent user the bot & support server invite.", inline=False)
             embed.add_field(name="`help`", value="Gives you an interactive menu to explore features of our bot.", inline=False)
+
         elif self.values[0] == "Developer":
             embed = discord.Embed(
                 title="Developer Commands",
@@ -86,8 +104,10 @@ class HelpCog(commands.Cog):
                 "Use the dropdown menu below to select a category and view related commands. "
                 "Each category contains commands grouped by functionality.\n\n"
                 "Examples:\n"
-                "`/help Moderation` - Shows moderation commands.\n"
+                "`/help Fun` - Shows fun commands.\n"
                 "`/help Utility` - Shows utility commands.\n"
+                "`/help Security` - Shows secuirity commands.\n"
+                "`/help Moderation` - Shows moderation commands.\n"
                 "`/help Developer` - Shows developer only commands.\n"
             ),
         )
