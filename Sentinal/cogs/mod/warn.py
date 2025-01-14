@@ -28,8 +28,9 @@ class WarnSystem(commands.Cog):
 
         if not member:
             embed = discord.Embed(
-                title="Missing Member",
-                description="You need to specify a user to kick. Please mention a user.",
+                title="",
+                description="**Missing member:** The correct usage is `warn <member>`.",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
             return
@@ -50,11 +51,12 @@ class WarnSystem(commands.Cog):
 
         embed = discord.Embed(
             title="User Warned",
-            description=f"{member.mention} has been warned.",
+            description=f"**Warned:** User {member.mention} has been `warned`.",
+            color=discord.Color.brand_red(),
         )
-        embed.add_field(name="Reason", value=reason, inline=False)
-        embed.add_field(name="Warning Code", value=warn_code, inline=False)
-        embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
+        embed.add_field(name="Reason", value=reason, inline=True)
+        embed.set_footer(text=f"Moderator: {ctx.author} • Warning Code: {warn_code}", icon_url=ctx.author.avatar.url)
+        
 
         await ctx.send(embed=embed)
 
@@ -70,18 +72,21 @@ class WarnSystem(commands.Cog):
                 warning_list = "\n".join(f"`{warning['code']}`: {warning['reason']}" for warning in user_warnings)
                 embed = discord.Embed(
                     title="User Warnings",
-                    description=f"Warnings for {member.mention}:",
+                    description=f"**User warning list:** {member.mention}:",
+                    color=discord.Color.orange(),
                 )
                 embed.add_field(name="Warnings", value=warning_list, inline=False)
             else:
                 embed = discord.Embed(
-                    title="No Warnings",
-                    description=f"{member.mention} has no warnings.",
+                    title="",
+                    description=f"**No warnings:** {member.mention} has no warnings.",
+                    color=discord.Color.orange(),
                 )
         else:
             embed = discord.Embed(
-                title="No Warnings",
-                description=f"{member.mention} has no warnings.",
+                title="",
+                description=f"**No warnings:** {member.mention} has no warnings.",
+                color=discord.Color.orange(),
             )
 
         await ctx.send(embed=embed)
@@ -97,12 +102,14 @@ class WarnSystem(commands.Cog):
             self.save_warnings()
             embed = discord.Embed(
                 title="Warnings Cleared",
-                description=f"All warnings for {member.mention} have been cleared.",
+                description=f"**Warnings cleared:** All warnings for {member.mention} have been deleted.",
+                color=discord.Color.brand_green(),
             )
         else:
             embed = discord.Embed(
                 title="No Warnings Found",
-                description=f"{member.mention} has no warnings to clear.",
+                description=f"**No warnings found:** {member.mention} has no warnings to clear.",
+                color=discord.Color.orange(),
             )
 
         await ctx.send(embed=embed)
@@ -125,8 +132,9 @@ class WarnSystem(commands.Cog):
 
                     # -> Success embed.
                     embed = discord.Embed(
-                        title="Warning Deleted",
-                        description=f"Warning `{code}` for {member.mention} has been deleted.",
+                        title="",
+                        description=f"**Warning deleted:** Warning `{code}` for {member.mention} has been deleted.",
+                        color=discord.Color.brand_red(),
                     )
                     await ctx.send(embed=embed)
                     return
@@ -134,13 +142,15 @@ class WarnSystem(commands.Cog):
             # -> If the code wasn't found.
             embed = discord.Embed(
                 title="Warning Not Found",
-                description=f"No warning with code `{code}` found for {member.mention}.",
+                description=f"**Code not found:** Warning code `{code}` not found found for {member.mention}.",
+                color=discord.Color.orange(),
             )
         else:
             # -> If no warnings exist for the user.
             embed = discord.Embed(
-                title="No Warnings Found",
-                description=f"{member.mention} has no warnings.",
+                title="",
+                description=f"**No warnings:** {member.mention} has no warnings.",
+                color=discord.Color.orange(),
             )
 
         await ctx.send(embed=embed)

@@ -59,6 +59,8 @@ class HelpDropdown(discord.ui.Select):
             embed.add_field(name="`ping`", value="Shows the bot's current latency when requested.", inline=False)
             embed.add_field(name="`invite`", value="Gives the recipitent user the bot & support server invite.", inline=False)
             embed.add_field(name="`help`", value="Gives you an interactive menu to explore features of our bot.", inline=False)
+            embed.add_field(name="`servercount`", value="Shows the total number of servers the bot is in.", inline=False)
+            embed.add_field(name="`autorole`", value="Brings up the sub-commands list to function this command.`", inline=False)
 
         elif self.values[0] == "Developer":
             embed = discord.Embed(
@@ -74,7 +76,7 @@ class HelpDropdown(discord.ui.Select):
 
 class BackButton(discord.ui.Button):
     def __init__(self, bot, original_embed):
-        super().__init__(label="Back", style=discord.ButtonStyle.blurple)
+        super().__init__(label="Back", style=discord.ButtonStyle.gray)
         self.bot = bot
         self.original_embed = original_embed
 
