@@ -89,7 +89,7 @@ class AutoRole(commands.Cog):
 
             embed = discord.Embed(
                 title="",
-                description=f"**Current autorole:** The current auto-role is {role.mention if role else 'Deleted Role'}.",
+                description=f"**Current autorole:** The current autorole for this guild is {role.mention if role else 'Deleted Role'}.",
                 color=discord.Color.brand_green(),
             )
         else:

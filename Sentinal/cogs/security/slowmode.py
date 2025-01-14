@@ -51,6 +51,7 @@ class SlowmodeCog(commands.Cog):
             embed = discord.Embed(
                 title="",
                 description="**Invalid value:** Channel slowmode cannot be a negative digit.",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
             return
