@@ -11,8 +11,9 @@ class UnbanCog(commands.Cog):
         # -> Check if an identifier (username or ID) was provided
         if not identifier:
             embed = discord.Embed(
-                title="Missing Identifier",
-                description="You need to specify a user to unban using their username or user ID.",
+                title="",
+                description="**Missing member/ID:** The correct usage is `ban <member/ID>`",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
             return
@@ -25,8 +26,9 @@ class UnbanCog(commands.Cog):
                     if ban_entry.user.id == user_id:
                         await ctx.guild.unban(ban_entry.user)
                         embed = discord.Embed(
-                            title="User Unbanned",
-                            description=f"The user `{ban_entry.user}` has been successfully unbanned.",
+                            title="",
+                            description=f"**Unbanned:** The user {ban_entry.user} has been `unbanned` from this guild.",
+                            color=discord.Color.brand_green(),
                         )
                         embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
                         await ctx.send(embed=embed)
@@ -40,7 +42,8 @@ class UnbanCog(commands.Cog):
                         await ctx.guild.unban(ban_entry.user)
                         embed = discord.Embed(
                             title="User Unbanned",
-                            description=f"The user `{ban_entry.user}` has been successfully unbanned.",
+                            description=f"**Unbanned:** The user {ban_entry.user} has been `unbanned` from this guild.",
+                            color=discord.Color.brand_green(),
                         )
                         embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
                         await ctx.send(embed=embed)
@@ -48,22 +51,25 @@ class UnbanCog(commands.Cog):
 
             # -> If no user was found.
             embed = discord.Embed(
-                title="User Not Found",
-                description=f"No banned user matching `{identifier}` was found.",
+                title="",
+                description=f"**User not found:** No banned user matching `{identifier}` was found.",
+                color=discord.Color.orange(),                
             )
             await ctx.send(embed=embed)
 
         except discord.Forbidden:
             embed = discord.Embed(
-                title="Insufficient Permissions",
-                description="I don't have the required permissions to unban this user.",
+                title="",
+                description="**No permissions:** I require the `Ban Members` permission to unban users.",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 
         except Exception as e:
             embed = discord.Embed(
                 title="Error",
-                description=f"An unexpected error occurred: {str(e)}",
+                description=f"**Error:** An unexpected error occurred: {str(e)}",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 

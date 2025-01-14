@@ -12,7 +12,8 @@ class PingCog(commands.Cog):
         # -> Ping embed.
         ping_embed = discord.Embed(
             title="",
-            description=f"**Pong!** Bot took `{bot_latency}ms` to respond."
+            description=f"**Pong!** Bot took `{bot_latency}ms` to respond.",
+            color=discord.Color.brand_green(),
         )
         await ctx.send(embed=ping_embed)
 

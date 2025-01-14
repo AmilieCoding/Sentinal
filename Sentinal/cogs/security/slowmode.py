@@ -27,8 +27,8 @@ class SlowmodeCog(commands.Cog):
                     seconds = int(args[0])
             except ValueError as e:
                 embed = discord.Embed(
-                    title="Error",
-                    description=str(e),
+                    title="",
+                    description=f"**Error:** {str(e)}",
                 )
                 await ctx.send(embed=embed)
                 return
@@ -49,8 +49,8 @@ class SlowmodeCog(commands.Cog):
         # -> Check if the input time is valid.
         if seconds < 0:
             embed = discord.Embed(
-                title="Invalid Slowmode Value",
-                description="Slowmode delay cannot be negative.",
+                title="",
+                description="**Invalid value:** Channel slowmode cannot be a negative digit.",
             )
             await ctx.send(embed=embed)
             return
@@ -61,13 +61,14 @@ class SlowmodeCog(commands.Cog):
 
             # -> Provide feedback to the user.
             if seconds == 0:
-                description = f"Slowmode has been **disabled** in {channel.mention}."
+                description = f"**Disabled:** Slowmode has been **disabled** in {channel.mention}."
             else:
-                description = f"Slowmode for {channel.mention} is now set to **{seconds} seconds**."
+                description = f"**Enabled:** Slowmode for {channel.mention} is now set to **{seconds} seconds**."
 
             embed = discord.Embed(
                 title="Slowmode Updated",
                 description=description,
+                color=discord.Color.brand_green(),
             )
             embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
 
@@ -76,15 +77,17 @@ class SlowmodeCog(commands.Cog):
         except discord.Forbidden:
             # -> Bot lacks permissions to edit the channel.
             embed = discord.Embed(
-                title="Permission Denied",
-                description=f"I don't have permission to edit {channel.mention}.",
+                title="",
+                description=f"**No permissions:** I require the `Manage Channel` permission to change slowmode.",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
         except Exception as e:
             # -> Catch other errors and display them.
             embed = discord.Embed(
-                title="Error",
-                description=f"An unexpected error occurred: {e}",
+                title="",
+                description=f"**Error:** An unexpected error occurred: {e}",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 
