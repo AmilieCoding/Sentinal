@@ -66,7 +66,7 @@ class SlowmodeCog(commands.Cog):
                 description = f"**Enabled:** Slowmode for {channel.mention} is now set to **{seconds} seconds**."
 
             embed = discord.Embed(
-                title="Slowmode Updated",
+                title="",
                 description=description,
                 color=discord.Color.brand_green(),
             )
