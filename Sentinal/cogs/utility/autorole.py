@@ -35,8 +35,8 @@ class AutoRole(commands.Cog):
     @commands.group(name="autorole",invoke_without_commands=True, aliases=["ar"])
     async def autorole(self, ctx):
         embed = discord.Embed(
-            title="AutoRole Commands",
-            description="Use the following subcommands to manage auto-roles:",
+            title="",
+            description="**** Autorole commands:** Subcommands to manage the guild autorole.",
         )
         embed.add_field(name="setautorole", value="Set the auto-role for new members.", inline=False)
         embed.add_field(name="deleteautorole", value="Delete the auto-role for new members.", inline=False)
@@ -51,8 +51,9 @@ class AutoRole(commands.Cog):
         self.save_data()
 
         embed = discord.Embed(
-            title="AutoRole Set",
-            description=f"Auto-role has been set to {role.mention}",
+            title="",
+            description=f"**Autorole set:** Autorole has been set to {role.mention} for this guild.",
+            color=discord.Color.brand_green(),
         )
         await ctx.send(embed=embed)
 
@@ -65,14 +66,16 @@ class AutoRole(commands.Cog):
             self.save_data()
 
             embed = discord.Embed(
-                title="AutoRole Deleted",
-                description="The auto-role has been removed.",
+                title="",
+                description="**Autorole deleted:** The autorole has been removed for this guild.",
+                color=discord.Color.brand_green(),
             )
             await ctx.send(embed=embed)
         else:
             embed = discord.Embed(
-                title="No AutoRole Set",
-                description="There is no auto-role set for this server."
+                title="",
+                description="**No autorole set:** No autorole has been set for this guild.",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 
@@ -85,13 +88,15 @@ class AutoRole(commands.Cog):
             role = ctx.guild.get_role(role_id)
 
             embed = discord.Embed(
-                title="Current AutoRole",
-                description=f"The current auto-role is {role.mention if role else 'Deleted Role'}."
+                title="",
+                description=f"**Current autorole:** The current autorole for this guild is {role.mention if role else 'Deleted Role'}.",
+                color=discord.Color.brand_green(),
             )
         else:
             embed = discord.Embed(
-                title="No AutoRole Set",
-                description="There is no auto-role set for this server.",
+                title="",
+                description="**No autorole set:** No autorole has been set for this guild.",
+                color=discord.Color.orange(),
             )
         await ctx.send(embed=embed)
 

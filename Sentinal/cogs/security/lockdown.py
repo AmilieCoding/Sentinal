@@ -11,7 +11,9 @@ class LockdownCog(commands.Cog):
         await channel.set_permissions(channel.guild.default_role, overwrite=overwrite, reason=reason)
 
         # -> Create the embed message for the locked channel.
-        embed = discord.Embed(title="Channel Locked Down", color=discord.Color.red())
+        embed = discord.Embed(title="",
+                description=f"**Channel locked:** The channel {channel.mention} has been locked down.",
+                color=discord.Color.brand_red())
         embed.add_field(name="Moderator", value=moderator, inline=False)
         if message:
             embed.add_field(name="Message", value=message, inline=False)
@@ -35,8 +37,9 @@ class LockdownCog(commands.Cog):
 
             # -> Confirmation embed sent to the invoking channel.
             embed = discord.Embed(
-                title="Lockdown Successful",
-                description=f"The channel {channel.mention} has been locked.",
+                title="",
+                description=f"**Channel locked:** The channel {channel.mention} has been locked down.",
+                color=discord.Color.brand_red()
             )
             embed.add_field(name="Moderator", value=ctx.author.mention, inline=False)
             await ctx.send(embed=embed)
@@ -44,8 +47,9 @@ class LockdownCog(commands.Cog):
         except Exception as e:
             # -> Error embed.
             embed = discord.Embed(
-                title="Error",
-                description=f"An error occurred while locking down the channel: {e}",
+                title="",
+                description=f"**Error:** An error occurred while locking down the channel: {e}",
+                color=discord.Color.orange()
             )
             await ctx.send(embed=embed)
 
@@ -68,7 +72,8 @@ class LockdownCog(commands.Cog):
 
             # -> Create the embed message for the invoking channel.
             embed = discord.Embed(
-                title="Lockdown All Completed",
+                title="",
+                color=discord.Color.brand_red()
             )
             embed.add_field(name="Moderator", value=ctx.author.mention, inline=False)
 
@@ -82,15 +87,16 @@ class LockdownCog(commands.Cog):
                     inline=False
                 )
             else:
-                embed.description = "All channels have been successfully locked."
+                description="**Lockdown all completed:** All channels have been locked."
 
             await ctx.send(embed=embed)
 
         except Exception as e:
             # -> Error embed.
             embed = discord.Embed(
-                title="Error",
-                description=f"An error occurred while locking down all channels: {e}",
+                title="",
+                description=f"**Error:** An error occurred while locking down all channels: {e}",
+                color=discord.Color.orange()
             )
             await ctx.send(embed=embed)
 
@@ -100,7 +106,10 @@ class LockdownCog(commands.Cog):
         await channel.set_permissions(channel.guild.default_role, overwrite=overwrite, reason=reason)
 
         # -> Create the embed message for the unlocked channel.
-        embed = discord.Embed(title="Channel Unlocked", color=discord.Color.green())
+        embed = discord.Embed(title="", 
+            description="**Channel unlocked:** The channel has been unlocked.",
+            color=discord.Color.brand_green()
+            )
         embed.add_field(name="Moderator", value=moderator, inline=False)
         if message:
             embed.add_field(name="Message", value=message, inline=False)
@@ -124,8 +133,9 @@ class LockdownCog(commands.Cog):
 
             # -> Confirmation embed sent to the invoking channel.
             embed = discord.Embed(
-                title="Unlock Successful",
-                description=f"The channel {channel.mention} has been unlocked.",
+                title="",
+                description=f"**Channel unlocked:** The channel has been unlocked.",
+                color=discord.Color.brand_green(),
             )
             embed.add_field(name="Moderator", value=ctx.author.mention, inline=False)
             await ctx.send(embed=embed)
@@ -133,8 +143,9 @@ class LockdownCog(commands.Cog):
         except Exception as e:
             # -> Error embed.
             embed = discord.Embed(
-                title="Error",
-                description=f"An error occurred while unlocking the channel: {e}",
+                title="",
+                description=f"**Error:** An error occurred while unlocking the channel: {e}",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 
@@ -157,7 +168,8 @@ class LockdownCog(commands.Cog):
 
             # -> Create the embed message for the invoking channel.
             embed = discord.Embed(
-                title="Unlock All Completed",
+                title="",
+                color=discord.Color.brand_green()
             )
             embed.add_field(name="Moderator", value=ctx.author.mention, inline=False)
 
@@ -171,15 +183,16 @@ class LockdownCog(commands.Cog):
                     inline=False
                 )
             else:
-                embed.description = "All channels have been successfully unlocked."
+                embed.description = "**Unlock all completed:** All channels have been unlocked."
 
             await ctx.send(embed=embed)
 
         except Exception as e:
             # -> Error embed.
             embed = discord.Embed(
-                title="Error",
-                description=f"An error occurred while unlocking all channels: {e}",
+                title="",
+                description=f"**Error:** An error occurred while unlocking all channels: {e}",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 

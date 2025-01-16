@@ -16,7 +16,9 @@ class InviteCommand(commands.Cog):
         # -> Create the embed.
         embed = discord.Embed(
             title="",
-            description=f"**Invite me! [Click any of this bolded blue text to invite the bot!]({invite_url})**"
+            description=f"**Invite me! [Click any of this bolded blue text to invite the bot!]({invite_url})**",
+            color=discord.Color.brand_green(),
+
         )
         embed.add_field(name="Need an invite to our Support Server?", value="[Click here, and it'll redirect you to our server.](https://discord.gg/2q7sHEUwzX)", inline=True)
         embed.set_footer(text=f"Requested by {ctx.author}", icon_url=ctx.author.avatar.url)

@@ -21,7 +21,7 @@ class ServerLogger(commands.Cog):
         total_servers = len(self.bot.guilds)
 
         embed = discord.Embed(
-            title="Bot has joined a guild.",
+            title="Guild Joined",
             color=discord.Color.green()
         )
         embed.add_field(name="Server Name", value=guild_name, inline=False)
@@ -47,7 +47,7 @@ class ServerLogger(commands.Cog):
         total_servers = len(self.bot.guilds)
 
         embed = discord.Embed(
-            title="Bot has left a guild.",
+            title="Guild Left",
             color=discord.Color.red()
         )
         embed.add_field(name="Server Name", value=guild_name, inline=False)
