@@ -62,9 +62,9 @@ class SlowmodeCog(commands.Cog):
 
             # -> Provide feedback to the user.
             if seconds == 0:
-                description = f"**Disabled:** Slowmode has been **disabled** in {channel.mention}."
+                description = f"**Disabled:** Slowmode has been `reset` in {channel.mention}."
             else:
-                description = f"**Enabled:** Slowmode for {channel.mention} is now set to **{seconds} seconds**."
+                description = f"**Enabled:** Slowmode for {channel.mention} is now set to `{seconds} seconds`."
 
             embed = discord.Embed(
                 title="",
