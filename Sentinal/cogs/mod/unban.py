@@ -41,7 +41,7 @@ class UnbanCog(commands.Cog):
                     if ban_entry.user.name == username:
                         await ctx.guild.unban(ban_entry.user)
                         embed = discord.Embed(
-                            title="User Unbanned",
+                            title="",
                             description=f"**Unbanned:** The user {ban_entry.user} has been `unbanned` from this guild.",
                             color=discord.Color.brand_green(),
                         )
@@ -67,7 +67,7 @@ class UnbanCog(commands.Cog):
 
         except Exception as e:
             embed = discord.Embed(
-                title="Error",
+                title="",
                 description=f"**Error:** An unexpected error occurred: {str(e)}",
                 color=discord.Color.orange(),
             )

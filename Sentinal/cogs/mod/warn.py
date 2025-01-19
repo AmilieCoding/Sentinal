@@ -50,7 +50,7 @@ class WarnSystem(commands.Cog):
         self.save_warnings()
 
         embed = discord.Embed(
-            title="User Warned",
+            title="",
             description=f"**Warned:** User {member.mention} has been `warned`.",
             color=discord.Color.brand_red(),
         )
@@ -71,7 +71,7 @@ class WarnSystem(commands.Cog):
             if user_warnings:
                 warning_list = "\n".join(f"`{warning['code']}`: {warning['reason']}" for warning in user_warnings)
                 embed = discord.Embed(
-                    title="User Warnings",
+                    title="",
                     description=f"**User warning list:** {member.mention}:",
                     color=discord.Color.orange(),
                 )
@@ -101,13 +101,13 @@ class WarnSystem(commands.Cog):
             self.warnings[guild_id][user_id] = []
             self.save_warnings()
             embed = discord.Embed(
-                title="Warnings Cleared",
+                title="",
                 description=f"**Warnings cleared:** All warnings for {member.mention} have been deleted.",
                 color=discord.Color.brand_green(),
             )
         else:
             embed = discord.Embed(
-                title="No Warnings Found",
+                title="",
                 description=f"**No warnings found:** {member.mention} has no warnings to clear.",
                 color=discord.Color.orange(),
             )
@@ -141,7 +141,7 @@ class WarnSystem(commands.Cog):
 
             # -> If the code wasn't found.
             embed = discord.Embed(
-                title="Warning Not Found",
+                title="",
                 description=f"**Code not found:** Warning code `{code}` not found found for {member.mention}.",
                 color=discord.Color.orange(),
             )
