@@ -52,7 +52,7 @@ class KickCog(commands.Cog):
         try:
             await ctx.guild.kick(member)
             embed = discord.Embed(
-                title="User Kicked",
+                title="",
                 description=f"**Kicked:** The user {member.mention} has been `kicked` from this guild.",
                 color=discord.Color.brand_red(),
             )
@@ -67,7 +67,7 @@ class KickCog(commands.Cog):
             await ctx.send(embed=embed)
         except discord.HTTPException as e:
             embed = discord.Embed(
-                title="Kick Failed",
+                title="",
                 description=f"**Ban failed:** An error occurred while trying to kick the user: {str(e)}",
                 color=discord.Color.orange(),
             )

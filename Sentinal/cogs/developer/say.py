@@ -22,11 +22,11 @@ class SayCog(commands.Cog):
         else:
             # -> Embed for the access denied error.
             embed = discord.Embed(
-                title="Access Denied",
-                description="You are not part of the Developer team, therefore you cannot use this command.",
+                title="",
+                description="**Access denied:** You have to be a Developer to use this command.",
+                color=discord.Color.orange(),
             )
             await ctx.send(embed=embed)
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(SayCog(bot))
-

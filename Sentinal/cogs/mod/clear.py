@@ -58,7 +58,7 @@ class ClearCog(commands.Cog):
             await ctx.send(embed=embed)
         elif isinstance(error, commands.MissingPermissions):
             embed = discord.Embed(
-                title="Permission Denied",
+                title="",
                 description="**No permissions:** I require the `Manage Messages` permission to ban users.",
                 color=discord.Color.orange(),
             )
