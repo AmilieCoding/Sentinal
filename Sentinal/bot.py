@@ -10,6 +10,7 @@ intents.members = True
 intents.presences = True
 bot = commands.Bot(command_prefix=">", intents=intents, help_command=None)
 
+
 # -> Asynchronous function to load cogs from JSON
 async def laad_cogs_van_json(json_file):
     with open(os.path.join(os.path.dirname(__file__), json_file), "r") as file:
@@ -28,6 +29,9 @@ async def load_extensions():
 # -> Registers when the bot is online.
 @bot.event
 async def on_ready():
+    await bot.change_presence(
+        status=discord.Status.dnd
+    )
     print(f"Bot is online as user: {bot.user}")
 
 # -> Main entry point to load extensions and start the bot.
