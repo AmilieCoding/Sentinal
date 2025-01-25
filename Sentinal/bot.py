@@ -29,9 +29,7 @@ async def load_extensions():
 # -> Registers when the bot is online.
 @bot.event
 async def on_ready():
-    await bot.change_presence(
-        status=discord.Status.dnd
-    )
+    await bot.change_presence(status=discord.Status.dnd)
     print(f"Bot is online as user: {bot.user}")
 
 # -> Main entry point to load extensions and start the bot.
