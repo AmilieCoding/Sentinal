@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 class SlowmodeCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # -> Traditional command (prefix-based)
     @commands.command(name="slowmode", aliases=["sm"])
     @commands.has_permissions(manage_channels=True)
     async def slowmode(self, ctx, *args):
@@ -92,5 +94,16 @@ class SlowmodeCog(commands.Cog):
             )
             await ctx.send(embed=embed)
 
+    # -> Slash command implementation
+    @app_commands.command(name="slowmode", description="Set or reset the slowmode of a channel.")
+    @app_commands.checks.has_permissions(manage_channels=True)
+    async def slowmode_slash(self, interaction: discord.Interaction, channel: discord.TextChannel = None, seconds: int = 0):
+        # -> If no channel is provided, use the current channel
+        if not channel:
+            channel = interaction.channel
+
+        await self.apply_slowmode(interaction, channel, seconds)
+
 async def setup(bot: commands.Bot):
     await bot.add_cog(SlowmodeCog(bot))
+    # -> Register the slash commands with the bot
