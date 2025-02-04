@@ -1,32 +1,58 @@
 from discord.ext import commands
+from discord import app_commands
 import discord
 
 class SayCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # -> Replace with your support server ID and Developer role ID.
     SUPPORT_SERVER_ID = 1311372303224930355
     DEVELOPER_ROLE_ID = 1311377148677980171
 
     @commands.command(name="say")
     async def say(self, ctx, *, message: str):
-        # -> Fetch the support server.
-        support_server = self.bot.get_guild(self.SUPPORT_SERVER_ID)
-        developer_role = discord.utils.get(support_server.roles, id=self.DEVELOPER_ROLE_ID)
+        """Prefix command: Allows developers to send messages through the bot."""
+        await self.send_message(ctx, message)
 
-        # -> Get the user's membership in the support server
-        member = support_server.get_member(ctx.author.id)
+    @app_commands.command(name="say", description="Send a message anonymously through the bot.")
+    async def say_slash(self, interaction: discord.Interaction, message: str):
+        """Slash command: Allows developers to send messages through the bot (anonymously)."""
+        await self.send_message(interaction, message, is_slash=True)
+
+    async def send_message(self, ctx_or_interaction, message: str, is_slash: bool = False):
+        """Handles both prefix and slash command execution."""
+        support_server = self.bot.get_guild(self.SUPPORT_SERVER_ID)
+        if not support_server:
+            return  # Ensure the bot is in the support server
+
+        developer_role = discord.utils.get(support_server.roles, id=self.DEVELOPER_ROLE_ID)
+        
+        # Determine the author based on the command type
+        if isinstance(ctx_or_interaction, commands.Context):
+            author = ctx_or_interaction.author
+            channel = ctx_or_interaction.channel
+        else:  # Slash command
+            author = ctx_or_interaction.user
+            channel = ctx_or_interaction.channel  # FIX: Properly referencing channel
+
+        member = support_server.get_member(author.id)
         if member and developer_role in member.roles:
-            await ctx.send(message)
+            await channel.send(message)  # Sends message anonymously
+
+            # Slash command: Send confirmation privately
+            if is_slash:
+                await ctx_or_interaction.response.send_message(
+                    "The message has been sent.", ephemeral=True
+                )
         else:
-            # -> Embed for the access denied error.
             embed = discord.Embed(
-                title="",
-                description="**Access denied:** You have to be a Developer to use this command.",
+                description="**Access denied:** You must be a Developer to use this command.",
                 color=discord.Color.orange(),
             )
-            await ctx.send(embed=embed)
+            if is_slash:
+                await ctx_or_interaction.response.send_message(embed=embed, ephemeral=True)
+            else:
+                await ctx_or_interaction.send(embed=embed)
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(SayCog(bot))
