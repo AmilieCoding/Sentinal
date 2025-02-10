@@ -4,6 +4,7 @@ from discord import app_commands
 import logging
 import json
 import os
+from datetime import datetime
 
 class auditlog(commands.Cog):
     def __init__(self, bot):
@@ -26,12 +27,17 @@ class auditlog(commands.Cog):
             json.dump(self.audit_log_channels, f, indent=4)
 
     async def log_to_channel(self, guild_id: int, embed: discord.Embed):
-        channel_id = self.audit_log_channels.get(str(guild_id))
-        if channel_id:
-            channel = self.bot.get_channel(channel_id)
-            if channel:
-                embed.timestamp = datetime.utcnow()
-                await channel.send(embed=embed)
+        try:
+            channel_id = self.audit_log_channels.get(str(guild_id))
+            if channel_id:
+                channel = self.bot.get_channel(channel_id)
+                if channel:
+                    embed.timestamp = datetime.utcnow()
+                    await channel.send(embed=embed)
+                else:
+                    self.logger.warning(f"Could not find channel with ID {channel_id}")
+        except Exception as e:
+            self.logger.error(f"Error in log_to_channel: {str(e)}")
 
     @commands.command(name="setauditlog")
     @commands.has_permissions(administrator=True)
