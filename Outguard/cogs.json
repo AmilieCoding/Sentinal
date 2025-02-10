@@ -12,6 +12,7 @@
     "cogs.mod.warn",
     "cogs.security.lockdown",
     "cogs.security.slowmode",
+    "cogs.security.auditlog",
     "cogs.developer.say",
     "cogs.developer.serverlog",
     "cogs.developer.vip",
