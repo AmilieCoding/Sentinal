@@ -16,6 +16,7 @@
     "cogs.developer.serverlog",
     "cogs.developer.vip",
     "cogs.developer.eval",
-    "cogs.fun.gru"
+    "cogs.fun.gru",
+    "cogs.fun.counting"
     ]
 }
