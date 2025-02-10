@@ -5,6 +5,7 @@ import logging
 import json
 import os
 from datetime import datetime
+from discord.utils import utcnow
 
 class auditlog(commands.Cog):
     def __init__(self, bot):
@@ -32,7 +33,7 @@ class auditlog(commands.Cog):
             if channel_id:
                 channel = self.bot.get_channel(channel_id)
                 if channel:
-                    embed.timestamp = datetime.utcnow()
+                    embed.timestamp = utcnow()  # Use discord.utils.utcnow() here
                     await channel.send(embed=embed)
                 else:
                     self.logger.warning(f"Could not find channel with ID {channel_id}")
