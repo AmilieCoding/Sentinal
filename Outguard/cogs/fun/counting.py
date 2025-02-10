@@ -57,7 +57,7 @@ class Counting(commands.Cog):
         self.counting_channel = channel
         embed = discord.Embed(
             title="",
-            description=f"**Counting channel set:** You can start counting from `{self.start_number}`.\n\n- Text will be deleted when sent, the only allows numbers in the sequence.\n- If the number has a checkmark, it means the number has been accepted.",
+            description=f"**Counting channel set:** You can start counting from `{self.start_number}`.\n\n- Text will be deleted when sent, bot only allows numbers in the sequence.\n- If the number has a checkmark, it means the number has been accepted.",
             color=discord.Color.brand_green()
         )
         await channel.send(embed=embed)
