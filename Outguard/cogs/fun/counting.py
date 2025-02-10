@@ -49,16 +49,13 @@ class Counting(commands.Cog):
             await message.delete()
             return
 
-        # Check if the user is the same as the last user who sent a valid number
         last_user = self.counting_data[server_id].get("last_user")
         if last_user == str(message.author.id):
             await message.delete()
-            await message.channel.send(f"{message.author.mention}, you need to wait for another user to send a number first.")
             return
         
-        # Update the tracking for the next number and the user who sent it
         self.counting_data[server_id]["start_number"] = current_number + 1
-        self.counting_data[server_id]["last_user"] = str(message.author.id)  # Store the user who sent the last valid number
+        self.counting_data[server_id]["last_user"] = str(message.author.id)
         self.save_counting_data()
 
         await message.add_reaction("✅")
@@ -71,10 +68,10 @@ class Counting(commands.Cog):
         
         server_id = str(ctx.guild.id)
         if server_id not in self.counting_data:
-            self.counting_data[server_id] = {}  # Add the server's data if it doesn't exist
+            self.counting_data[server_id] = {}
 
         self.counting_data[server_id]["counting_channel"] = channel.id
-        self.counting_data[server_id]["start_number"] = 1  # Reset the counting to start from 1
+        self.counting_data[server_id]["start_number"] = 1
 
         self.save_counting_data()
 
