@@ -15,6 +15,7 @@
     "cogs.developer.say",
     "cogs.developer.serverlog",
     "cogs.developer.vip",
+    "cogs.developer.eval",
     "cogs.fun.gru"
     ]
 }
