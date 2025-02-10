@@ -1,3 +1,9 @@
+import discord
+from discord.ext import commands  # This is necessary for 'commands' to be recognized
+from discord import app_commands
+import json
+import os
+
 class Counting(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
