@@ -12,10 +12,13 @@ class Counting(commands.Cog):
     def load_counting_data(self):
         if os.path.exists("counting_data.json"):
             with open("counting_data.json", "r") as f:
+                print("Loaded counting data")
                 return json.load(f)
+        print("No counting data file found, starting fresh.")
         return {}
 
     def save_counting_data(self):
+        print("Saving counting data...")
         with open("counting_data.json", "w") as f:
             json.dump(self.counting_data, f, indent=4)
 
@@ -24,9 +27,9 @@ class Counting(commands.Cog):
         if message.author.bot:
             return
         
-        # Check if this server has a counting channel set
         server_id = str(message.guild.id)
         if server_id not in self.counting_data:
+            print(f"No data for server {server_id}, ignoring message.")
             return
 
         counting_channel = self.counting_data[server_id].get("counting_channel")
@@ -56,7 +59,9 @@ class Counting(commands.Cog):
             return
         
         server_id = str(ctx.guild.id)
-        self.counting_data[server_id] = self.counting_data.get(server_id, {})
+        if server_id not in self.counting_data:
+            self.counting_data[server_id] = {}  # Add the server's data if it doesn't exist
+
         self.counting_data[server_id]["counting_channel"] = channel.id
         self.counting_data[server_id]["start_number"] = 1  # Reset the counting to start from 1
 
@@ -90,7 +95,9 @@ class Counting(commands.Cog):
     @app_commands.command(name="setcountingchannel", description="Set the counting channel for the server.")
     async def setcountingchannel_slash(self, interaction: discord.Interaction, channel: discord.TextChannel):
         server_id = str(interaction.guild.id)
-        self.counting_data[server_id] = self.counting_data.get(server_id, {})
+        if server_id not in self.counting_data:
+            self.counting_data[server_id] = {}
+
         self.counting_data[server_id]["counting_channel"] = channel.id
         self.counting_data[server_id]["start_number"] = 1  # Reset the counting to start from 1
 
