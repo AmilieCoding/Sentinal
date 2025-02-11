@@ -30,7 +30,8 @@ async def load_extensions():
 # -> Registers when the bot is online.
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status.dnd)
+    total_users = sum(guild.member_count for guild in bot.guilds)
+    await bot.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name=f"{total_users} users"))
     try:
         await bot.tree.sync()  # Sync slash commands globally
         print("Slash commands have been synced.")
