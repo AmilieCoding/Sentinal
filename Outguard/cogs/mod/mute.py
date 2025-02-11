@@ -41,7 +41,7 @@ class Mute(commands.Cog):
             except ValueError:
                 embed = discord.Embed(
                     title="",
-                    description="**Invalid format:** Use number + s/m/h/d\nExample: 30s, 5m, 1h, 7d",
+                    description="**Invalid format:** Use number + s/m/h/d\n```Example: 30s, 5m, 1h, 7d```",
                     color=discord.Color.orange()
                 )
                 return await ctx.send(embed=embed)
@@ -54,9 +54,9 @@ class Mute(commands.Cog):
             
             embed = discord.Embed(
                 title="",
-                description=f"**Timed out:** {member.mention} has been `timed` out",
+                description=f"**Timed out:** {member.mention} has been `timed` out.",
                 color=discord.Color.brand_red(),
-                timestamp=datetime.utcnow()
+                timestamp=discord.utils.utcnow()
             )
             embed.add_field(name="Duration", value=duration or "5 minutes")
             if reason:
@@ -101,7 +101,7 @@ class Mute(commands.Cog):
                 title="",
                 description=f"**Timeout removed:** {member.mention} has been `untimed` out.",
                 color=discord.Color.brand_green(),
-                timestamp=datetime.utcnow()
+                timestamp=discord.utils.utcnow()
             )
             if reason:
                 embed.add_field(name="Reason", value=reason)
