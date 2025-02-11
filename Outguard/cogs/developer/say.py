@@ -17,14 +17,14 @@ class SayCog(commands.Cog):
     async def say_slash(self, interaction: discord.Interaction, message: str):
         await self.send_message(interaction, message, is_slash=True)
 
-    @app_commands.command(name="reply", description="Reply to a user's message.")
-    async def reply(self, interaction: discord.Interaction, user_id: str, message: str):
-        # Attempt to convert the user_id to an integer
+    @app_commands.command(name="reply", description="Reply to a message by its ID.")
+    async def reply(self, interaction: discord.Interaction, message_id: str, message: str):
+        # Attempt to convert the message_id to an integer
         try:
-            user_id = int(user_id)
+            message_id = int(message_id)
         except ValueError:
             await interaction.response.send_message(
-                "Invalid user ID. Please input a valid integer.", ephemeral=True
+                "Invalid message ID. Please input a valid integer.", ephemeral=True
             )
             return
 
@@ -36,20 +36,21 @@ class SayCog(commands.Cog):
         author = interaction.user
         member = support_server.get_member(author.id)
         if member and developer_role in member.roles:
-            user = support_server.get_member(user_id)
-            if user:
-                messages = await interaction.channel.history(limit=100).flatten()
-                for msg in messages:
-                    if msg.author.id == user_id:
-                        await msg.reply(message)
-                        await interaction.response.send_message(
-                            f"Replied to {user.mention} successfully.", ephemeral=True
-                        )
-                        return
+            channel = interaction.channel
 
+            try:
+                # Attempt to fetch the message by ID
+                message_to_reply = await channel.fetch_message(message_id)
+                await message_to_reply.reply(message)
+                await interaction.response.send_message(
+                    f"Replied to the message successfully.", ephemeral=True
+                )
+            except discord.NotFound:
                 await interaction.response.send_message("Message not found.", ephemeral=True)
-            else:
-                await interaction.response.send_message("User not found in this server.", ephemeral=True)
+            except discord.Forbidden:
+                await interaction.response.send_message("I don't have permission to fetch that message.", ephemeral=True)
+            except discord.HTTPException:
+                await interaction.response.send_message("An error occurred while trying to fetch the message.", ephemeral=True)
         else:
             embed = discord.Embed(
                 description="**Access denied:** You must be a Developer to use this command.",
