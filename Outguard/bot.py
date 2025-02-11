@@ -8,7 +8,17 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 intents.presences = True
-bot = commands.Bot(command_prefix=">", intents=intents, help_command=None)
+
+async def get_prefix(bot, message):
+    if not message.guild:
+        return ">"
+        
+    prefix_cog = bot.get_cog('SetPrefix')
+    if prefix_cog:
+        return prefix_cog.get_prefix(message.guild.id)
+    return ">"
+
+bot = commands.Bot(command_prefix=get_prefix, intents=intents, help_command=None)
 
 # -> Asynchronous function to load cogs from JSON
 async def laad_cogs_van_json(json_file):
