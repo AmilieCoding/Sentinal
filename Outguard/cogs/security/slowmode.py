@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 
-class SlowmodeCog(commands.Cog):
+class Slowmode(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -105,4 +105,4 @@ class SlowmodeCog(commands.Cog):
         await self.apply_slowmode(interaction, channel, seconds)
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(SlowmodeCog(bot))
+    await bot.add_cog(Slowmode(bot))
