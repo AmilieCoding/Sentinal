@@ -18,7 +18,16 @@ class SayCog(commands.Cog):
         await self.send_message(interaction, message, is_slash=True)
 
     @app_commands.command(name="reply", description="Reply to a user's message.")
-    async def reply(self, interaction: discord.Interaction, user_id: int, message: str):
+    async def reply(self, interaction: discord.Interaction, user_id: str, message: str):
+        # Attempt to convert the user_id to an integer
+        try:
+            user_id = int(user_id)
+        except ValueError:
+            await interaction.response.send_message(
+                "Invalid user ID. Please input a valid integer.", ephemeral=True
+            )
+            return
+
         support_server = self.bot.get_guild(self.SUPPORT_SERVER_ID)
         if not support_server:
             return
