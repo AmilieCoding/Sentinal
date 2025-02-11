@@ -10,6 +10,7 @@
     "cogs.mod.clear",
     "cogs.mod.forceban",
     "cogs.mod.warn",
+    "cogs.mod.mute",
     "cogs.security.lockdown",
     "cogs.security.slowmode",
     "cogs.security.auditlog",
