@@ -118,6 +118,25 @@ class HelpCog(commands.Cog):
         view = HelpView(self.bot, original_embed, show_back=False)
         await ctx.send(embed=original_embed, view=view)
 
+    @discord.app_commands.command(name="help", description="Get help with bot commands")
+    async def slash_help(self, interaction: discord.Interaction):
+        original_embed = discord.Embed(
+            title="Help Command",
+            description=(
+                "Use the dropdown menu below to select a category and view related commands. "
+                "Each category contains commands grouped by functionality.\n\n"
+                "Examples:\n"
+                "`/help Fun` - Shows fun commands.\n"
+                "`/help Utility` - Shows utility commands.\n"
+                "`/help Security` - Shows secuirity commands.\n"
+                "`/help Moderation` - Shows moderation commands.\n"
+                "`/help Developer` - Shows developer only commands.\n"
+            ),
+        )
+        original_embed.set_footer(text=f"Requested by {interaction.user}", icon_url=interaction.user.avatar.url)
+        view = HelpView(self.bot, original_embed, show_back=False)
+        await interaction.response.send_message(embed=original_embed, view=view)
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(HelpCog(bot))

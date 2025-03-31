@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 
-class SlowmodeCog(commands.Cog):
+class Slowmode(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # -> Traditional command (prefix-based)
     @commands.command(name="slowmode", aliases=["sm"])
     @commands.has_permissions(manage_channels=True)
     async def slowmode(self, ctx, *args):
@@ -45,22 +47,23 @@ class SlowmodeCog(commands.Cog):
 
         await self.apply_slowmode(ctx, channel, seconds)
 
-    async def apply_slowmode(self, ctx, channel, seconds):
-        # -> Check if the input time is valid.
+    async def apply_slowmode(self, ctx_or_interaction, channel, seconds):
+        # Check if the input time is valid
         if seconds < 0:
             embed = discord.Embed(
                 title="",
                 description="**Invalid value:** Channel slowmode cannot be a negative digit.",
                 color=discord.Color.orange(),
             )
-            await ctx.send(embed=embed)
+            if isinstance(ctx_or_interaction, discord.Interaction):
+                await ctx_or_interaction.response.send_message(embed=embed)
+            else:
+                await ctx_or_interaction.send(embed=embed)
             return
 
-        # -> Apply the slowmode to the specified channel.
         try:
             await channel.edit(slowmode_delay=seconds)
 
-            # -> Provide feedback to the user.
             if seconds == 0:
                 description = f"**Disabled:** Slowmode has been `reset` in {channel.mention}."
             else:
@@ -71,26 +74,35 @@ class SlowmodeCog(commands.Cog):
                 description=description,
                 color=discord.Color.brand_green(),
             )
-            embed.set_footer(text=f"Moderator: {ctx.author}", icon_url=ctx.author.avatar.url)
+            
+            author = ctx_or_interaction.user if isinstance(ctx_or_interaction, discord.Interaction) else ctx_or_interaction.author
+            embed.set_footer(text=f"Moderator: {author}", icon_url=author.avatar.url)
 
-            await ctx.send(embed=embed)
+            if isinstance(ctx_or_interaction, discord.Interaction):
+                await ctx_or_interaction.response.send_message(embed=embed)
+            else:
+                await ctx_or_interaction.send(embed=embed)
 
         except discord.Forbidden:
-            # -> Bot lacks permissions to edit the channel.
             embed = discord.Embed(
                 title="",
-                description=f"**No permissions:** I require the `Manage Channel` permission to change slowmode.",
+                description="**No permissions:** I require the `Manage Channel` permission to change slowmode.",
                 color=discord.Color.orange(),
             )
-            await ctx.send(embed=embed)
-        except Exception as e:
-            # -> Catch other errors and display them.
-            embed = discord.Embed(
-                title="",
-                description=f"**Error:** An unexpected error occurred: {e}",
-                color=discord.Color.orange(),
-            )
-            await ctx.send(embed=embed)
+            if isinstance(ctx_or_interaction, discord.Interaction):
+                await ctx_or_interaction.response.send_message(embed=embed)
+            else:
+                await ctx_or_interaction.send(embed=embed)
+
+    # -> Slash command implementation
+    @app_commands.command(name="slowmode", description="Set or reset the slowmode of a channel.")
+    @app_commands.checks.has_permissions(manage_channels=True)
+    async def slowmode_slash(self, interaction: discord.Interaction, channel: discord.TextChannel = None, seconds: int = 0):
+        # -> If no channel is provided, use the current channel
+        if not channel:
+            channel = interaction.channel
+
+        await self.apply_slowmode(interaction, channel, seconds)
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(SlowmodeCog(bot))
+    await bot.add_cog(Slowmode(bot))

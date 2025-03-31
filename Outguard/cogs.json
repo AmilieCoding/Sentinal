@@ -10,11 +10,17 @@
     "cogs.mod.clear",
     "cogs.mod.forceban",
     "cogs.mod.warn",
+    "cogs.mod.mute",
     "cogs.security.lockdown",
     "cogs.security.slowmode",
+    "cogs.security.auditlog",
+    "cogs.security.setprefix",
     "cogs.developer.say",
     "cogs.developer.serverlog",
     "cogs.developer.vip",
-    "cogs.fun.gru"
+    "cogs.developer.eval",
+    "cogs.developer.reviveping",
+    "cogs.fun.gru",
+    "cogs.fun.counting"
     ]
 }
